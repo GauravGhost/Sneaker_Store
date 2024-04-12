@@ -1,3 +1,4 @@
+import 'package:ecommerce/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -40,12 +41,12 @@ class IntroPage extends StatelessWidget {
                   height: 48,
                 ),
                 GestureDetector(
-                  // onTap: () => Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => HomePage(),
-                  //   ),
-                  // ),
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ),
+                  ),
                   child: Container(
                     decoration: BoxDecoration(
                         color: Colors.grey[900],
