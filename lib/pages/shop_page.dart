@@ -1,3 +1,5 @@
+import 'package:ecommerce/components/shoe_tile.dart';
+import 'package:ecommerce/models/shoe.dart';
 import 'package:flutter/material.dart';
 
 class ShopPage extends StatefulWidget {
@@ -17,8 +19,14 @@ class _ShopPageState extends State<ShopPage> {
             // search bar
             _searchBar(),
             // message
-
+            _message(),
             // hot picks
+            _hotPicksSection(),
+
+            const SizedBox(height: 10),
+
+            // Shoe Tiles
+            _shoeTiles(context)
           ],
         ));
   }
@@ -42,6 +50,58 @@ class _ShopPageState extends State<ShopPage> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _message() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 25.0),
+      child: Text(
+        'everyone flies... some fly longer than others',
+        style: TextStyle(color: Colors.grey[600]),
+      ),
+    );
+  }
+
+  Widget _hotPicksSection() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            'Hot Picks 🔥',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
+          ),
+          Text(
+            'See all',
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blue),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _shoeTiles(BuildContext context) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: 4,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+        
+        Shoe shoe = Shoe(
+            name: 'Air jordan',
+            price: '230',
+            description: 'cool shoe',
+            imagePath: 'lib/images/2.jpg');
+        return ShoeTile(
+          shoe: shoe,
+        );
+      }),
     );
   }
 }
