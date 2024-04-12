@@ -23,10 +23,18 @@ class _ShopPageState extends State<ShopPage> {
             // hot picks
             _hotPicksSection(),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
 
             // Shoe Tiles
-            _shoeTiles(context)
+            _shoeTiles(context),
+
+            // Divider
+            Padding(
+              padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
+              child: Divider(
+                color: Colors.grey[300],
+              ),
+            )
           ],
         ));
   }
@@ -92,16 +100,16 @@ class _ShopPageState extends State<ShopPage> {
         itemCount: 4,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-        
-        Shoe shoe = Shoe(
-            name: 'Air jordan',
-            price: '230',
-            description: 'cool shoe',
-            imagePath: 'lib/images/2.jpg');
-        return ShoeTile(
-          shoe: shoe,
-        );
-      }),
+          Shoe shoe = Shoe(
+              name: 'Air jordan',
+              price: '230',
+              description: 'cool shoe',
+              imagePath: 'lib/images/2.jpg');
+          return ShoeTile(
+            shoe: shoe,
+          );
+        },
+      ),
     );
   }
 }
