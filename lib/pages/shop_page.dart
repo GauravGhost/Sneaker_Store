@@ -1,6 +1,8 @@
 import 'package:ecommerce/components/shoe_tile.dart';
+import 'package:ecommerce/models/cart.dart';
 import 'package:ecommerce/models/shoe.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ShopPage extends StatefulWidget {
   const ShopPage({super.key});
@@ -10,33 +12,51 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
+  // Adding shoe to cart method
+  void addShoeToCart(Shoe shoe) {
+    Provider.of<Cart>(context, listen: false).addItemToCart(shoe);
+
+    // Alert for success
+    showDialog(
+      
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12)
+        ),
+        title: const Text('Successfully Added!'),
+        content: const Text('Check your cart'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.grey[300],
-        body: Column(
-          children: [
-            // search bar
-            _searchBar(),
-            // message
-            _message(),
-            // hot picks
-            _hotPicksSection(),
+    return Consumer<Cart>(builder: (context, value, child) {
+      return Column(
+        children: [
+          // search bar
+          _searchBar(),
+          // message
+          _message(),
+          // hot picks
+          _hotPicksSection(),
 
-            const SizedBox(height: 8),
+          const SizedBox(height: 8),
 
-            // Shoe Tiles
-            _shoeTiles(context),
+          // Shoe Tiles
+          _shoeTiles(context, value),
 
-            // Divider
-            Padding(
-              padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
-              child: Divider(
-                color: Colors.grey[300],
-              ),
-            )
-          ],
-        ));
+          // Divider
+          Padding(
+            padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
+            child: Divider(
+              color: Colors.grey[300],
+            ),
+          )
+        ],
+      );
+    });
   }
 
   Widget _searchBar() {
@@ -94,19 +114,16 @@ class _ShopPageState extends State<ShopPage> {
     );
   }
 
-  Widget _shoeTiles(BuildContext context) {
+  Widget _shoeTiles(BuildContext context, Cart value) {
     return Expanded(
       child: ListView.builder(
-        itemCount: 4,
+        itemCount: value.getShoeList().length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          Shoe shoe = Shoe(
-              name: 'Air jordan',
-              price: '230',
-              description: 'cool shoe',
-              imagePath: 'lib/images/2.jpg');
+          Shoe shoe = value.getShoeList()[index];
           return ShoeTile(
             shoe: shoe,
+            onTap: () => addShoeToCart(shoe),
           );
         },
       ),

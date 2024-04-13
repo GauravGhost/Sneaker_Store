@@ -8,17 +8,17 @@ class Cart extends ChangeNotifier{
         name: 'Air Jordan',
         price: '1223',
         description: 'Air jordan luxurious',
-        imagePath: 'lib/images/4.jpg'),
+        imagePath: 'lib/images/1.jpg'),
     Shoe(
         name: 'Air Jordan',
         price: '1223',
         description: 'Air jordan luxurious',
-        imagePath: 'lib/images/4.jpg'),
+        imagePath: 'lib/images/2.jpg'),
     Shoe(
         name: 'Air Jordan',
         price: '1223',
         description: 'Air jordan luxurious',
-        imagePath: 'lib/images/4.jpg'),
+        imagePath: 'lib/images/3.jpg'),
     Shoe(
         name: 'Air Jordan',
         price: '1223',
